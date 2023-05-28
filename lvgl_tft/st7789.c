@@ -67,9 +67,9 @@ void st7789_init(void)
         {ST7789_COLMOD, {0x55}, 1},
 
 #if ST7789_INVERT_COLORS == 1
-		{ST7789_INVON, {0}, 0}, // set inverted mode
-#else
  		{ST7789_INVOFF, {0}, 0}, // set non-inverted mode
+#else
+		{ST7789_INVON, {0}, 0}, // set inverted mode
 #endif
 
         {ST7789_RGBCTRL, {0x00, 0x1B}, 2},
@@ -234,11 +234,12 @@ static void st7789_set_orientation(uint8_t orientation)
 
     uint8_t data[] =
     {
-#if CONFIG_LV_PREDEFINED_DISPLAY_TTGO
-	0x60, 0xA0, 0x00, 0xC0
-#else
-	0xC0, 0x00, 0x60, 0xA0
-#endif
+        // #if CONFIG_LV_PREDEFINED_DISPLAY_TTGO
+        // 	0x60, 0xA0, 0x00, 0xC0
+        // #else
+        // 	0xC0, 0x00, 0x60, 0xA0
+        // #endif
+        0xC0, 0x00, 0x60, 0xA0
     };
 
     ESP_LOGI(TAG, "0x36 command value: 0x%02X", data[orientation]);
